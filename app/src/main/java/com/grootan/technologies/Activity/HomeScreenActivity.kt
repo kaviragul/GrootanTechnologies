@@ -298,7 +298,6 @@ class HomeScreenActivity : AppCompatActivity() {
             win.attributes = winParams
         }
     }
-
     fun unMappedAddSellerFragment() {
         val addSellerFragment = AttemptsFragment()
         val bundle = Bundle()
