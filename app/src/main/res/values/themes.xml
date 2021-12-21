@@ -32,4 +32,14 @@
         <item name="colorAccent">@color/yellow</item> <!-- Whatever color you want-->
     </style>
 
+    <style name="Theme.GrootanTechnologies.NoActionBar.FullScreenDialog">
+        <item name="android:windowAnimationStyle">@style/DialogAnimation</item>
+        <item name="android:windowSoftInputMode">stateHidden|adjustPan</item>
+    </style>
+
+    <style name="DialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/slide_up</item>
+        <item name="android:windowExitAnimation">@anim/slide_down</item>
+    </style>
+
 </resources>

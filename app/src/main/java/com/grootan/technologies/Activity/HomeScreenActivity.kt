@@ -30,6 +30,7 @@ import android.graphics.Color
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
+import com.grootan.technologies.Fragments.AttemptsFragment
 import java.util.*
 
 class HomeScreenActivity : AppCompatActivity() {
@@ -44,6 +45,7 @@ class HomeScreenActivity : AppCompatActivity() {
     var txt_scramble: TextView? = null
     var txt_timer: TextView? = null
     var txt_Attempts: TextView? = null
+    var lin_attempts: LinearLayout? = null
     val time = intArrayOf(45)
     var cTimer: CountDownTimer? = null
     var noOfAttemts = 0
@@ -55,6 +57,8 @@ class HomeScreenActivity : AppCompatActivity() {
     var noOfMoves = ""
     var userModelList: MutableList<UserModel?>? = null
     var checkSwap = false
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -84,6 +88,7 @@ class HomeScreenActivity : AppCompatActivity() {
         progressBar = findViewById(R.id.progressBar)
         lin_scramble = findViewById(R.id.lin_scramble)
         txt_Attempts = findViewById(R.id.txt_Attempts)
+        lin_attempts = findViewById(R.id.lin_attempts)
         cubeModelList = ArrayList()
         userModelList = ArrayList()
         auth = FirebaseAuth.getInstance()
@@ -152,6 +157,10 @@ class HomeScreenActivity : AppCompatActivity() {
             }
             checkSwap = true
         })
+
+        lin_attempts!!.setOnClickListener {
+            unMappedAddSellerFragment()
+        }
     }
 
     fun resetList() {
@@ -289,4 +298,21 @@ class HomeScreenActivity : AppCompatActivity() {
             win.attributes = winParams
         }
     }
+
+    fun unMappedAddSellerFragment() {
+        val addSellerFragment = AttemptsFragment()
+        val bundle = Bundle()
+        bundle.putString("email", "xyz@gmail.com")
+        bundle.putBoolean("fullScreen", true)
+        bundle.putBoolean("notAlertDialog", true)
+        addSellerFragment.arguments = bundle
+        val ft = supportFragmentManager.beginTransaction()
+        val prev = supportFragmentManager.findFragmentByTag("dialog")
+        if (prev != null) {
+            ft.remove(prev)
+        }
+        ft.addToBackStack(null)
+        addSellerFragment.show(ft, "dialog")
+    }
+
 }
